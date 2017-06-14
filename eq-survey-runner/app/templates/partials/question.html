@@ -1,0 +1,56 @@
+{% import 'macros/helpers.html' as helpers %}
+
+{% set invalid = form.question_errors[question.id] | length > 0 if form else False %}
+
+{% set question_number = question.number %}
+{% set question_title = question.title %}
+{% set question_subtitle = question.subtitle %}
+{% set question_guidance = "" %}
+
+{% set question_titles %}
+  {%- if question_title -%}
+    <h2 class="question__title neptune">
+      {%- if question_number -%}
+        <span class="question__number">{{question_number}}. </span>
+      {% endif %}
+      {{question_title|safe}}
+    </h2>
+  {%- endif %}
+  {%- if question_subtitle -%}
+    <h3 class="question__subtitle mars">{{question_subtitle|safe}}</h3>
+  {%- endif -%}
+{% endset %}
+
+{% set question_description %}
+  {%- if question.description -%}
+    <div class="question__description mars" id="description-{{question.id}}">
+      {{question.description|safe}}
+    </div>
+  {% endif %}
+{% endset %}
+
+{% set question_guidance %}
+  {%- if question.guidance -%}
+    <aside class="question__guidance">
+      <div class="panel panel--simple panel--info" id="question-guidance-{{question.id}}">
+        {%- for guidance in question.guidance -%}
+          {%- if guidance.title -%}
+            <h3 class="venus">{{guidance.title}}</h3>
+          {% endif %}
+          {%- if guidance.description -%}
+            <div class="mars">{{guidance.description|safe}}</div>
+          {% endif %}
+          {%- if guidance.list -%}
+            <ul class="mars">
+              {%- for item in guidance.list -%}
+                <li>{{item|safe}}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </aside>
+  {% endif %}
+{% endset %}
+
+{% include theme('partials/questions/'~question.type|lower~'.html') %}

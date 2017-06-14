@@ -1,0 +1,24 @@
+<div class="field">
+    {% set label = {
+      'for': answer.id,
+      'text': answer.label
+    } %}
+
+    {% include 'partials/forms/label.html' %}
+
+    {% set input = form[answer['id']] %}
+
+    {% set attr = {
+      "class": "input input--textarea js-charlimit-input",
+      "aria-describedby": "description-" ~ question.id ~ " guidance-" ~ answer.id ~ "-trigger",
+      "name": input.name,
+      "id": "input-" ~ answer.id,
+      "placeholder": answer.placeholder,
+      "rows": "8",
+      "cols": "60",
+    } %}
+
+    {% set answer_helper = answer.name ~ "-helper" %}
+
+    <textarea {{attr|xmlattr}}>{{ form.get_data(answer['id']) }}</textarea>
+</div>

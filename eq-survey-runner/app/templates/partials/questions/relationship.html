@@ -1,0 +1,44 @@
+<div class="question question--repeatinganswer" id="{{question.id}}">
+
+  <h2 class="question__title neptune">
+    {%- if question_number -%}
+      <span class="question__number">{{question_number}}{{current_location.group_instance|format_number_to_alphabetic_letter}}. </span>
+    {% endif %}
+    {{question_title|safe}}
+  </h2>
+
+  {{question_description|safe}}
+  <fieldset>
+    <legend class="field__legend u-vh">
+      {{question_title|safe}}
+    </legend>
+    <div class="question__answers">
+        {% for current_person, other_person in content.relation_instances %}
+          {% set answer = question.answers[0] %}
+          {% set relation_instance = loop.index0 %}
+          {% include 'partials/widgets/relationship_widget.html' %}
+        {%- endfor -%}
+    </div>
+  </fieldset>
+</div>
+
+{% if (question.guidance) %}
+
+  {% set question_guidance %}
+    {%- for guidance in question.guidance -%}
+      <ul class="u-m-no">
+        {%- for item in guidance.list -%}
+          <li>{{item|safe}}</li>
+        {% endfor %}
+      </ul>
+    {% endfor %}
+  {% endset %}
+
+  {% with answer_guidance = {
+    'id': question.id,
+    'label': question.label,
+    'content': question_guidance
+  } %}
+    {% include 'partials/answer-guidance.html' %}
+  {% endwith %}
+{% endif %}

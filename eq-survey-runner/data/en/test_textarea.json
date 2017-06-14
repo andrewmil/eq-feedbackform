@@ -1,0 +1,50 @@
+{
+    "mime_type": "application/json/ons/eq",
+    "schema_version": "0.0.1",
+    "data_version": "0.0.1",
+    "survey_id": "0",
+    "title": "Other input fields",
+    "theme": "default",
+    "legal_basis": "StatisticsOfTradeAct",
+    "description": "A questionnaire to test textareas.",
+    "messages": {
+        "INTEGER_TOO_LARGE": "Number is too large",
+        "NEGATIVE_INTEGER": "Number cannot be less than zero",
+        "NOT_INTEGER": "Please enter an integer"
+    },
+    "groups": [{
+        "blocks": [{
+                "type": "Questionnaire",
+                "id": "textarea-block",
+                "sections": [{
+                    "description": "",
+                    "id": "section",
+                    "questions": [{
+                        "answers": [{
+                            "guidance": "",
+                            "id": "answer",
+                            "label": "Enter your comments",
+                            "mandatory": false,
+                            "options": [],
+                            "q_code": "0",
+                            "type": "TextArea"
+                        }],
+                        "description": "",
+                        "id": "question",
+                        "title": "",
+                        "type": "General"
+                    }],
+                    "title": "Textarea Test"
+                }],
+                "routing_rules": [],
+                "title": ""
+            },
+            {
+                "type": "Summary",
+                "id": "textarea-summary"
+            }
+        ],
+        "id": "textarea-group",
+        "title": ""
+    }]
+}

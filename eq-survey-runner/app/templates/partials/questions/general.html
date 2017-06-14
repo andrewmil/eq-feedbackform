@@ -1,0 +1,53 @@
+{% set question_answers %}
+ <div class="question__answers">
+   {%- for answer in question.answers -%}
+     {% if not answer.parent_answer_id %}
+      <div class="question__answer">
+       {% include theme('partials/answer.html') %}
+      </div>
+     {% endif %}
+   {%- endfor -%}
+ </div>
+{% endset %}
+
+<div class="question" id="{{question.id}}">
+
+  {% set question_markup %}
+
+    {% if question.answers|length > 1 %}
+
+      {{question_titles|safe}}
+
+      <fieldset class="question__fieldset js-question-fieldset">
+
+        <legend class="u-vh">{{question_title|striptags}}</legend>
+
+        {{question_description|safe}}
+        {{question_guidance|safe}}
+        {{question_answers|safe}}
+
+      </fieldset>
+
+    {% else %}
+
+      {{question_titles|safe}}
+      {{question_description|safe}}
+      {{question_guidance|safe}}
+      {{question_answers|safe}}
+
+    {% endif %}
+
+  {% endset %}
+
+  {% if invalid %}
+
+    {% include theme('partials/questions/errors.html') %}
+
+  {% else %}
+
+    {{question_markup|safe}}
+    {{question_actions|safe}}
+
+  {% endif %}
+
+</div>

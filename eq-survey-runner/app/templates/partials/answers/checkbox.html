@@ -1,0 +1,6 @@
+{% set widget_type = "checkbox" %}
+{% set input = form[answer['id']] %}
+
+<div class="field field--checkbox field--multiplechoice {{'field--cols' if use_grid}}">
+  {% include 'partials/widgets/multiple_choice_widget.html' %}
+</div>
